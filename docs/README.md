@@ -1,28 +1,25 @@
 <a id="document-top"></a>
 
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
 [![License][license-shield]][license-url]
 
 <br />
 <div align="center">
-  <a href="https://github.com/SystemXFiles/process-governor">
-    <img src="icons/logo.png" alt="Logo">
+  <a href="https://github.com/Edward-Lucas/Threadix">
+    <img src="icons/logo.png" alt="Threadix Logo">
   </a>
 
-<h3 align="center">Process Governor</h3>
+<h3 align="center">Threadix</h3>
 
   <p align="center">
-    A utility to automate Windows process and service management.
-    <br />
-    <a href="#documentation"><strong>Explore the docs »</strong></a>
+    A Windows thread and process manager with a Fyne-based GUI.
     <br />
     <br />
-    <a href="https://github.com/SystemXFiles/process-governor/issues/new?labels=bug&template=bug-report.md">Report Bug</a>
+    <a href="#getting-started"><strong>Get started quickly »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/Edward-Lucas/Threadix/issues/new?labels=bug">Report Bug</a>
     ·
-    <a href="https://github.com/SystemXFiles/process-governor/issues/new?labels=enhancement&template=feature-request.md">Request Feature</a>
+    <a href="https://github.com/Edward-Lucas/Threadix/issues/new?labels=enhancement">Request Feature</a>
   </p>
 </div>
 
@@ -30,93 +27,87 @@
   <summary>Table of Contents</summary>
   <ol>
     <li><a href="#about-the-project">About The Project</a></li>
+    <li><a href="#features">Features</a></li>
     <li><a href="#getting-started">Getting Started</a></li>
-    <li><a href="#documentation">Documentation</a></li>
-    <li><a href="#star-history">Star History</a></li>
+    <li><a href="#building">Building</a></li>
     <li><a href="#license">License</a></li>
   </ol>
 </details>
 
 ## About The Project
 
-<div align="center">
-   <img src="images/screenshots/process_list_faded.png" width="95%" height="95%">
-</div>
+Threadix is a Windows utility for managing process priority, CPU affinity, and thread grouping.
+It uses a Fyne GUI for process selection, priority changes, and affinity management while applying rules in the background.
 
-**Process Governor** is a Python utility that automates the management of Windows processes and services by adjusting
-their priorities, I/O priorities, and core affinity according to user-defined rules.
+### What this repository contains
 
-### Features
+- `backend/` — Go-based backend and GUI application
+- `backend/build.bat` — build script with icon resource support
+- `backend/build_no_console.bat` — GUI-only build script without console window
+- `backend/resources/` — application icon and optional Korean font resource
 
-- Adjust process and service priorities for better performance.
-- Control I/O priorities to optimize resource utilization.
-- Define core affinity for processes.
-- Fine-tune Windows services and processes based on user-defined rules.
+<p align="right">(<a href="#document-top">back to top</a>)</p>
 
-### Screenshots
+## Features
 
-<details>
-    <summary>Click to expand</summary>
-
-> ![](images/screenshots/process_list.png)
->
-> ![](images/screenshots/process_rules.png)
->
-> ![](images/screenshots/tray_menu.png)
-</details>
+- Manage running processes on Windows
+- View and change process priority classes
+- Move processes between thread groups with specific core affinity
+- Restore the current process affinity to the full system mask on startup
+- Tray menu support and close-to-tray behavior
+- Windows GUI build scripts with embedded icon support
 
 <p align="right">(<a href="#document-top">back to top</a>)</p>
 
 ## Getting Started
 
-To get started with **Process Governor**, follow these steps:
+To run the application from source:
 
-1. Download the latest ready-to-use build from the following
-   link: [Latest Release](https://github.com/SystemXFiles/process-governor/releases/latest).
-2. Run the `Process Governor.exe` executable with **administrative privileges**.
-3. Configure the rules for processes and services.
-4. **Optionally**, enable auto-start for the program to launch automatically with the system.
+```powershell
+cd backend
+go run .
+```
 
-You can close the program by accessing the tray icon.
+For a release-style Windows executable with GUI subsystem:
+
+```powershell
+cd backend
+build_no_console.bat
+```
+
+If you want a standard build instead:
+
+```powershell
+cd backend
+go build -buildvcs=false -ldflags "-H=windowsgui" -o threadix.exe .
+```
+
+> Note: `resources/malgun.ttf` is included as an optional font resource, but the application will also attempt to use the system-installed Malgun Gothic font if available.
 
 <p align="right">(<a href="#document-top">back to top</a>)</p>
 
-## Documentation
+## Building
 
-- [Process Governor UI](ui_process_governor.md)
-- [Rule Behavior and Tips](rule_behavior_and_tips.md)
-- [Configuration file](configuration_file.md)
-- [Running from source and creating a portable build](run_and_build.md)
+The provided build scripts handle icon embedding and creating a Windows GUI executable.
 
-<p align="right">(<a href="#document-top">back to top</a>)</p>
+- `build.bat` — builds `threadix.exe` with icon and GUI subsystem
+- `build_no_console.bat` — builds without a console window
 
-## Star History
-
-[![Star History Chart](https://api.star-history.com/svg?repos=SystemXFiles/process-governor&type=Date)](https://star-history.com/#SystemXFiles/process-governor&Date)
+If you prefer manual build steps, use `go build` with the `-ldflags "-H=windowsgui"` option.
 
 <p align="right">(<a href="#document-top">back to top</a>)</p>
 
 ## License
 
-This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](../LICENSE) file for details.
+This project follows the license defined in `process-governor-release/LICENSE`.
 
 <p align="right">(<a href="#document-top">back to top</a>)</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/SystemXFiles/process-governor.svg?style=for-the-badge
+[license-shield]: https://img.shields.io/github/license/Edward-Lucas/Threadix.svg?style=for-the-badge
 
-[contributors-url]: https://github.com/SystemXFiles/process-governor/graphs/contributors
-
-[forks-shield]: https://img.shields.io/github/forks/SystemXFiles/process-governor.svg?style=for-the-badge
-
-[forks-url]: https://github.com/SystemXFiles/process-governor/network/members
-
-[stars-shield]: https://img.shields.io/github/stars/SystemXFiles/process-governor.svg?style=for-the-badge
-
-[stars-url]: https://github.com/SystemXFiles/process-governor/stargazers
-
-[issues-shield]: https://img.shields.io/github/issues/SystemXFiles/process-governor.svg?style=for-the-badge
+[license-url]: https://github.com/Edward-Lucas/Threadix/blob/main/process-governor-release/LICENSE
 
 [issues-url]: https://github.com/SystemXFiles/process-governor/issues
 
