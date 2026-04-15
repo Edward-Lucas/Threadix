@@ -64,21 +64,18 @@ It uses a Fyne GUI for process selection, priority changes, and affinity managem
 To run the application from source:
 
 ```powershell
-cd backend
 go run .
 ```
 
 For a release-style Windows executable with GUI subsystem:
 
 ```powershell
-cd backend
 build_no_console.bat
 ```
 
 If you want a standard build instead:
 
 ```powershell
-cd backend
 go build -buildvcs=false -ldflags "-H=windowsgui" -o threadix.exe .
 ```
 
